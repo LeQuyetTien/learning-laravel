@@ -12,7 +12,8 @@
         Back
     </a>
     <div class="row">
-        <div class="col-sm-4 product-card">
+        <div class="col-sm-12 text-center">
+            <img class="card-img-top product-image" src="/images/{{ $product->image }}" alt="Card image">
             <h2>{{ $product->name }}</h2>
             <p>{{ $product->description }}</p>
             <p>Giá: {{ $product->price }}</p>

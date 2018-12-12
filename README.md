@@ -167,13 +167,86 @@ class Product extends Model
 use App\Product;
 ```
 
-##Bài 7: Chuyển hướng route tới link của một bài viết
+## Bài 7: Chuyển hướng route tới link của một bài viết
 
-##Bài 8: Tối ưu hoá việc sử dụng route
+## Bài 8: Tối ưu hoá việc sử dụng route
 
-##Bài 9: Tối ưu hoá các views
+## Bài 9: Tối ưu hoá các views
 
 Blade Templates: https://laravel.com/docs/5.7/blade
+
+## Bài 10: Tạo data giả khi phát triển
+
+Faker: https://github.com/fzaninotto/Faker
+
+```
+composer require --dev fzaninotto/faker
+```
+
+Để tạo seeding cho products table ta sử dụng câu lệnh sau:
+
+```
+php artisan make:seeder ProductsTableSeeder
+```
+
+Sau khi chạy lệnh trên, 1 file tên là `ProductsTableSeeder.php` sẽ được tạo trong thư mục `database/seeds`
+
+Chúng ta sẽ cập nhật hàm tạo trong file này
+
+```
+<?php
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Carbon;
+use App\Product;
+
+class ProductsTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $faker = Faker\Factory::create();
+
+        for ($i=0; $i < 10; $i++) { 
+            $url = $faker->image($dir='[ĐƯỜNG_DẪN_ĐẾN_PROJECT]/public/images', $width='500', $height='500');
+            $image = substr($url, strpos($url, '\\')+1);
+
+            Product::create([
+                'name' => $faker->sentence($nbWords = 5, $variableNbWords = true),
+                'description' => $faker->sentence($nbWords = 20, $variableNbWords = true),
+                'image' => $image,
+                'price' => $faker->numberBetween(10000, 1000000),
+                'quantity' => $faker->numberBetween(0, 100),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]);
+        }
+    }
+}
+```
+
+Để chạy faker cho class **ProductsTableSeeder** ta sử dụng câu lệnh sau:
+
+```
+php artisan db:seed --class=ProductsTableSeeder
+```
+
+Để chạy nhiều faker 1 lúc, ta có thể thêm các class vào file `DatabaseSeeder.php` trong thư mục `database/seeds` như sau:
+
+```
+$this->call(UsersTableSeeder::class);
+$this->call(ProductsTableSeeder::class);
+```
+
+Và chạy câu lệnh sau để tạo nhiều faker:
+
+```
+php artisan db:seed
+```
 
 ## Tài liệu tham khảo
 
