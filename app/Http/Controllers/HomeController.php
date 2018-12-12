@@ -11,10 +11,4 @@ class HomeController extends Controller
     {
         return view('welcome');
     }
-
-    public function products() 
-    {
-        $products = Product::all();
-        return view('products', compact('products'));
-    }
 }

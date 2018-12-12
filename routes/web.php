@@ -13,5 +13,7 @@
 
 Route::get('/', 'HomeController@index');
 
-Route::get('/products', 'HomeController@products');
+Route::get('/products', 'ProductsController@index');
+
+Route::get('/products/{id}', 'ProductsController@detail');
 

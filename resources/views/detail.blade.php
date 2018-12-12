@@ -26,20 +26,17 @@
     </nav>
 
     <div class="container">
-        <h3>Danh sách sản phẩm</h3>
+        <a href="{{ url('/products') }}">
+            <span class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            Back
+        </a>
         <div class="row">
-            @foreach ($products as $p)
-                <div class="card col-sm-3">
-                    <img class="card-img-top" src="/images/product.png" alt="Card image">
-                    <div class="card-body">
-                        <a href="{{ url('products/'.$p->id) }}">
-                            <h4 class="card-title">{{ $p->name }}</h4>
-                        </a>
-                        <p class="card-text">{{ $p->description }}</p>
-                        <a href="#" class="btn btn-primary">Buy now</a>
-                    </div>
-                </div>
-            @endforeach
+            <div class="col-sm-4 product-card">
+                <h2>{{ $product->name }}</h2>
+                <p>{{ $product->description }}</p>
+                <p>Giá: {{ $product->price }}</p>
+                <p>Số lượng: {{ $product->quantity }}</p>
+            </div>
         </div>
     </div>
 
