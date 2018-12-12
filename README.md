@@ -27,9 +27,9 @@ php artisan serve
 1. Tạo database trong phpMyAdmin
 2. Cập nhật các tham số database trong file `.env`
 ```
-DB_DATABASE=*[TÊN_DATABASE]*
-DB_USERNAME=*[USERNAME]*
-DB_PASSWORD=*[PASSWORD]*
+DB_DATABASE=[TÊN_DATABASE]
+DB_USERNAME=[USERNAME]
+DB_PASSWORD=[PASSWORD]
 ```
 
 Lưu ý: Nếu tạo database với collation khác `utf4mb4` thì cần vào `config/database.php` cập nhật lại 2 giá trị `charset` và `collation` nếu không sẽ bị lỗi.
