@@ -171,6 +171,10 @@ use App\Product;
 
 ##Bài 8: Tối ưu hoá việc sử dụng route
 
+##Bài 9: Tối ưu hoá các views
+
+Blade Templates: https://laravel.com/docs/5.7/blade
+
 ## Tài liệu tham khảo
 
 1. [laravel.com](https://laravel.com/docs/)
