@@ -32,7 +32,7 @@
                 <div class="card col-sm-3">
                     <img class="card-img-top" src="/images/product.png" alt="Card image">
                     <div class="card-body">
-                        <a href="{{ url('products/'.$p->id) }}">
+                        <a href="{{ route('product.detail', $p->id) }}">
                             <h4 class="card-title">{{ $p->name }}</h4>
                         </a>
                         <p class="card-text">{{ $p->description }}</p>

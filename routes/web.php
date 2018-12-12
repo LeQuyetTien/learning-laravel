@@ -15,5 +15,7 @@ Route::get('/', 'HomeController@index');
 
 Route::get('/products', 'ProductsController@index');
 
-Route::get('/products/{id}', 'ProductsController@detail');
-
+Route::get('/products/{id}', [
+    'as'    => 'product.detail',
+    'uses'  => 'ProductsController@detail'
+]);
