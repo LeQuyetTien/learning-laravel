@@ -10,12 +10,12 @@ composer global require laravel/installer
 
 #### Khởi tạo project
 ```
-laravel new laravel
+laravel new [TÊN_PROJECT]
 ```
 
 #### Chạy thử project
 ```
-cd laravel
+cd [TÊN_PROJECT]
 php artisan serve
 ```
 
@@ -77,6 +77,77 @@ Sau khi import bootstrap và jQuery chúng ta sẽ thêm 3 file trên vào view
 <link rel="stylesheet" href="/css/bootstrap.min.css">
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
+```
+
+## Bài 5: Xây dựng thành phần cơ bản cho trang chủ
+
+#### Tạo controller
+php artisan make:controller [TÊN_CONTROLLER]
+
+Tài liệu về `Controllers`: https://laravel.com/docs/5.7/controllers
+
+## Bài 6: Database, migration và model
+
+#### Migration
+
+Để tạo migration cho bảng products ta dùng câu lệnh sau:
+
+```
+php artisan make:migration create_products_table
+```
+
+Sau khi chạy lệnh trên, 1 file tên là [TIMESTAMP]_create_products_table.php sẽ được tạo trong thư mục `database/migrations`
+
+Chúng ta sẽ thêm các fields vào trong function `up`
+
+```
+public function up()
+    {
+        Schema::create('products', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('description');
+            $table->string('image');
+            $table->double('price', 10, 2);
+            $table->integer('quantity');
+            $table->timestamps();
+        });
+    }
+```
+
+Để chạy các migrations ta sử dụng câu lệnh sau:
+
+```
+php artisan migrate
+```
+
+Sau khi chạy lệnh trên, ta vào database trong phpMyAdmin (nếu sử dụng mysql) sẽ thấy *table **products*** đã được tạo
+
+Tài liệu về `Migration`: https://viblo.asia/p/tim-hieu-ve-migration-trong-laravel-bWrZn1MpKxw
+
+#### Model
+
+Để tạo model Product ta dùng câu lệnh sau:
+
+```
+php artisan make:model Product
+```
+
+Sau khi chạy lệnh trên, 1 file tên là Product.php sẽ được tạo trong thư mục `app`
+
+Chúng ta sẽ liên kết *model **Product*** với *table **products*** bằng câu lệnh sau:
+
+```
+class Product extends Model
+{
+    protected $table = 'products';
+}
+```
+
+Để import *model **Product*** vào controller ta sử dụng câu lệnh sau:
+
+```
+use App\Product;
 ```
 
 ## Tài liệu tham khảo
