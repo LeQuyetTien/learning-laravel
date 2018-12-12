@@ -3,17 +3,17 @@ Tìm hiểu Laravel
 
 ## Bài 1: Thiết lập môi trường phát triển cơ bản
 
-###### Cài đặt laravel bằng composer
+#### Cài đặt laravel bằng composer
 ```
-composer global require laravel/installer`
+composer global require laravel/installer
 ```
 
-###### Khởi tạo project
+#### Khởi tạo project
 ```
 laravel new laravel
 ```
 
-###### Chạy thử project
+#### Chạy thử project
 ```
 cd laravel
 php artisan serve
@@ -23,7 +23,7 @@ php artisan serve
 
 ## Bài 3: Cấu hình project
 
-###### Kết nối database
+#### Kết nối database
 1. Tạo database trong phpMyAdmin
 2. Cập nhật các tham số database trong file `.env`
 ```
@@ -32,11 +32,16 @@ DB_USERNAME=*[USERNAME]*
 DB_PASSWORD=*[PASSWORD]*
 ```
 
-###### Browsersync Reloading
+> Nếu tạo database với collation khác `utf4mb4` thì cần vào `config/database.php` cập nhật lại 2 giá trị `charset` và `collation` nếu không sẽ bị lỗi.
+> Ví dụ mình sử dụng **mysql** và tạo database với collation là `utf8_unicode_ci` thì mình tìm đến **connections -> mysql** rồi đổi lại như sau:
+> 'charset' => 'utf8',                  /* Mặc định là utf8mb4 */
+> 'collation' => 'utf8_unicode_ci',     /* Mặc định là utf8mb4-unicode_ci */
+
+#### Browsersync Reloading
 Sử dụng Laravel Mix để tự động load lại trang khi develop
 
 1. Cài đặt Node
-2. Chạy câu lệnh sau trong thư mục project
+2. Chạy câu lệnh sau trong thư mục project để cài đặt các package vào thư mục `node_modules`
 ```
 npm install
 ```
