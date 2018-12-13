@@ -1,23 +1,24 @@
 # laravel
+
 Tìm hiểu Laravel
 
 ## Bài 1: Thiết lập môi trường phát triển cơ bản
 
-#### Cài đặt laravel bằng composer
+### Cài đặt laravel bằng composer
 
-```
+```bash
 composer global require laravel/installer
 ```
 
-#### Khởi tạo project
+### Khởi tạo project
 
-```
+```bash
 laravel new [TÊN_PROJECT]
 ```
 
-#### Chạy thử project
+### Chạy thử project
 
-```
+```bash
 cd [TÊN_PROJECT]
 php artisan serve
 ```
@@ -26,12 +27,12 @@ php artisan serve
 
 ## Bài 3: Cấu hình project
 
-#### Kết nối database
+### Kết nối database
 
 1. Tạo database trong phpMyAdmin
 2. Cập nhật các tham số database trong file `.env`
 
-```
+```php
 DB_DATABASE=[TÊN_DATABASE]
 DB_USERNAME=[USERNAME]
 DB_PASSWORD=[PASSWORD]
@@ -39,25 +40,21 @@ DB_PASSWORD=[PASSWORD]
 
 Lưu ý: Nếu tạo database với collation khác `utf4mb4` thì cần vào `config/database.php` cập nhật lại 2 giá trị `charset` và `collation` nếu không sẽ bị lỗi.
 
-> Ví dụ mình sử dụng **mysql** và tạo database với collation là `utf8_unicode_ci` thì mình tìm đến **connections -> mysql** rồi đổi lại như sau:<br/>
-> 'charset' => 'utf8',                  //Mặc định là utf8mb4 <br/>
-> 'collation' => 'utf8_unicode_ci',     //Mặc định là utf8mb4-unicode_ci <br/>
+> Ví dụ mình sử dụng **mysql** và tạo database với collation là `utf8_unicode_ci` thì mình tìm đến **connections -> mysql** rồi đổi lại như sau:
+>> 'charset' => 'utf8',                  //Mặc định là utf8mb4
+>>
+>> 'collation' => 'utf8_unicode_ci',     //Mặc định là utf8mb4-unicode_ci
 
-#### Browsersync Reloading
+### Browsersync Reloading
 
 Sử dụng Laravel Mix để tự động load lại trang khi develop
 
 1. Cài đặt Node
-2. Chạy câu lệnh sau trong thư mục project để cài đặt các package vào thư mục `node_modules`
-
-```
-npm install
-```
-
+2. Chạy câu lệnh `npm install` trong thư mục project để cài đặt các package vào thư mục `node_modules`
 3. Thêm câu lệnh `mix.browserSync('127.0.0.1:8000');` vào cuối file `webpack.mix.js`
 4. Chạy 2 câu lệnh sau cùng lúc (mở 2 cửa sổ cmd để chạy 2 câu lệnh)
 
-```
+```bash
 npm run watch
 php artisan serve
 ```
@@ -66,28 +63,31 @@ Tìm hiểu thêm về Lavavel Mix trong link sau: [Compiling Assets (Mix)](http
 
 ## Bài 4: Thiết lập giao diện
 
-#### Import Boostrap
+### Import Boostrap
 
 1. Download Boostrap
-Link download từ trang chủ: https://getbootstrap.com/docs/4.1/getting-started/download/ <br/>
-Link download từ github (có thư mục fonts): https://github.com/twbs/bootstrap/tree/master
+
+Link download từ trang chủ: <https://getbootstrap.com/docs/4.1/getting-started/download/>
+
+Link download từ github (có thư mục fonts): <https://github.com/twbs/bootstrap/tree/master>
 2. Giải nén
 3. Copy file `bootstrap.min.css` vào `thư mục public/css`
 3. Copy file `bootstrap.min.js` vào `thư mục public/js`
 4. Copy thư mục `font` vào trong thư mục `public`
 
-#### Import jQuery
+### Import jQuery
 
 1. Download jQuery
-Link download: https://jquery.com/download/
+
+Link download: <https://jquery.com/download/>
 2. Giải nén
 3. Copy file `jquery.min.js` vào `thư mục public/js`
 
-#### Thêm Bootstrap và jQuery vào View
+### Thêm Bootstrap và jQuery vào View
 
 Sau khi import bootstrap và jQuery chúng ta sẽ thêm 3 file trên vào view
 
-```
+```php
 <link rel="stylesheet" href="/css/bootstrap.min.css">
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
@@ -95,21 +95,21 @@ Sau khi import bootstrap và jQuery chúng ta sẽ thêm 3 file trên vào view
 
 ## Bài 5: Xây dựng thành phần cơ bản cho trang chủ
 
-#### Tạo controller
+### Tạo controller
 
-```
+```bash
 php artisan make:controller [TÊN_CONTROLLER]
 ```
 
-Tài liệu về `Controllers`: https://laravel.com/docs/5.7/controllers
+Tài liệu về `Controllers`: <https://laravel.com/docs/5.7/controllers>
 
 ## Bài 6: Database, migration và model
 
-#### Migration
+### Migration
 
 Để tạo migration cho bảng products ta dùng câu lệnh sau:
 
-```
+```bash
 php artisan make:migration create_products_table
 ```
 
@@ -117,7 +117,7 @@ Sau khi chạy lệnh trên, 1 file tên là [TIMESTAMP]_create_products_table.p
 
 Chúng ta sẽ thêm các fields vào trong function `up`
 
-```
+```php
 public function up()
     {
         Schema::create('products', function (Blueprint $table) {
@@ -134,19 +134,19 @@ public function up()
 
 Để chạy các migrations ta sử dụng câu lệnh sau:
 
-```
+```bash
 php artisan migrate
 ```
 
 Sau khi chạy lệnh trên, ta vào database trong phpMyAdmin (nếu sử dụng mysql) sẽ thấy *table **products*** đã được tạo
 
-Tài liệu về `Migration`: https://viblo.asia/p/tim-hieu-ve-migration-trong-laravel-bWrZn1MpKxw
+Tài liệu về `Migration`: <https://viblo.asia/p/tim-hieu-ve-migration-trong-laravel-bWrZn1MpKxw>
 
-#### Model
+### Model
 
 Để tạo model Product ta dùng câu lệnh sau:
 
-```
+```bash
 php artisan make:model Product
 ```
 
@@ -154,7 +154,7 @@ Sau khi chạy lệnh trên, 1 file tên là Product.php sẽ được tạo tro
 
 Chúng ta sẽ liên kết *model **Product*** với *table **products*** bằng câu lệnh sau:
 
-```
+```php
 class Product extends Model
 {
     protected $table = 'products';
@@ -163,7 +163,7 @@ class Product extends Model
 
 Để import *model **Product*** vào controller ta sử dụng câu lệnh sau:
 
-```
+```php
 use App\Product;
 ```
 
@@ -173,21 +173,21 @@ use App\Product;
 
 ## Bài 9: Tối ưu hoá các views
 
-Blade Templates: https://laravel.com/docs/5.7/blade
+Blade Templates: <https://laravel.com/docs/5.7/blade>
 
 ## Bài 10: Tạo data giả khi phát triển
 
-Faker: https://github.com/fzaninotto/Faker
+Faker: <https://github.com/fzaninotto/Faker>
 
 Để cài đặt Faker ta chạy lệnh sau:
 
-```
+```bash
 composer require --dev fzaninotto/faker
 ```
 
 Để tạo seeding cho products table ta sử dụng câu lệnh sau:
 
-```
+```bash
 php artisan make:seeder ProductsTableSeeder
 ```
 
@@ -195,7 +195,7 @@ Sau khi chạy lệnh trên, 1 file tên là `ProductsTableSeeder.php` sẽ đư
 
 Chúng ta sẽ cập nhật hàm tạo trong file này
 
-```
+```php
 <?php
 
 use Illuminate\Database\Seeder;
@@ -213,7 +213,8 @@ class ProductsTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        for ($i=0; $i < 10; $i++) { 
+        for ($i=0; $i < 10; $i++)
+        {
             $url = $faker->image($dir='[ĐƯỜNG_DẪN_ĐẾN_PROJECT]/public/images', $width='500', $height='500');
             $image = substr($url, strpos($url, '\\')+1);
 
@@ -233,13 +234,13 @@ class ProductsTableSeeder extends Seeder
 
 Để chạy faker cho class **ProductsTableSeeder** ta sử dụng câu lệnh sau:
 
-```
+```bash
 php artisan db:seed --class=ProductsTableSeeder
 ```
 
 Để chạy nhiều faker 1 lúc, ta có thể thêm các class vào file `DatabaseSeeder.php` trong thư mục `database/seeds` như sau:
 
-```
+```php
 public function run()
 {
     $this->call(UsersTableSeeder::class);
@@ -249,11 +250,33 @@ public function run()
 
 Và chạy câu lệnh sau để tạo nhiều faker:
 
-```
+```bash
 php artisan db:seed
 ```
 
 ## Bài 11: Thiết kế giao diện form thêm sản phẩm
+
+Forms Boostrap 4: <https://www.w3schools.com/bootstrap4/bootstrap_forms.asp>
+
+## Bài 12: Tạo sản phẩm mới với dữ liệu gửi từ form
+
+Trong Product model cần khai báo các trường có thể điền như sau:
+
+```php
+class Product extends Model
+{
+    protected $table = 'products';
+    protected $fillable = [
+        'name', 'description', 'image', 'price', 'quantity',
+    ];
+}
+```
+
+Trong form cần thêm câu lệnh `@csrf` để tạo token xác thực trước khi controller xử lý. Câu lệnh này tương đương lệnh sau:
+
+```php
+<input type="hidden" name="_token" value="{{ csrf_token() }}">
+```
 
 ## Tài liệu tham khảo
 

@@ -18,6 +18,8 @@
             
             <form action="{{ route('product.store') }}" method="post">
 
+                @csrf
+                
                 <div class="form-group">
                   <label for="name">Tên sản phẩm</label>
                   <input type="text" class="form-control" name="name" id="name" aria-describedby="helpName" placeholder="Tên sản phẩm">

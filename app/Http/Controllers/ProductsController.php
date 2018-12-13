@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Carbon;
+use Faker\Factory as Faker;
 use App\Product;
 
 class ProductsController extends Controller
@@ -22,5 +25,40 @@ class ProductsController extends Controller
     public function create() 
     {
         return view('products.create');
+    }
+
+    public function store() 
+    {
+        // in kết quả ra kết hợp 2 hàm die() và dump() trong php
+        // dd(Input::get('name'));
+
+        // dùng faker để tạo image
+        // require_once 'D:/dev/learning_laravel/vendor/fzaninotto/faker/src/autoload.php';
+        $faker = Faker::create();
+        $url = $faker->image($dir='D:/dev/learning_laravel/public/images', $width='500', $height='500');
+        $image = substr($url, strpos($url, '\\')+1);
+
+        // dd($image);
+
+        // get dữ liệu
+        $name = Input::get('name');
+        $description = Input::get('description');
+        // $image = $name.'.jpg';
+        $price = Input::get('price');
+        $quantity = Input::get('quantity');
+
+        // dd($image);
+
+        Product::create([
+            'name' => $name,
+            'description' => $description,
+            'image' => $image,
+            'price' => $price,
+            'quantity' => $quantity,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+
+        return redirect()->route('product.index');
     }
 }
