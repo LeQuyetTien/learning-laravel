@@ -167,7 +167,7 @@ class Product extends Model
 use App\Product;
 ```
 
-## Bài 7: Chuyển hướng route tới link của một bài viết
+## Bài 7: Chuyển hướng route tới link của một sản phẩm
 
 ## Bài 8: Tối ưu hoá việc sử dụng route
 
@@ -178,6 +178,8 @@ Blade Templates: https://laravel.com/docs/5.7/blade
 ## Bài 10: Tạo data giả khi phát triển
 
 Faker: https://github.com/fzaninotto/Faker
+
+Để cài đặt Faker ta chạy lệnh sau:
 
 ```
 composer require --dev fzaninotto/faker
@@ -238,8 +240,11 @@ php artisan db:seed --class=ProductsTableSeeder
 Để chạy nhiều faker 1 lúc, ta có thể thêm các class vào file `DatabaseSeeder.php` trong thư mục `database/seeds` như sau:
 
 ```
-$this->call(UsersTableSeeder::class);
-$this->call(ProductsTableSeeder::class);
+public function run()
+{
+    $this->call(UsersTableSeeder::class);
+    $this->call(ProductsTableSeeder::class);
+}
 ```
 
 Và chạy câu lệnh sau để tạo nhiều faker:
@@ -247,6 +252,8 @@ Và chạy câu lệnh sau để tạo nhiều faker:
 ```
 php artisan db:seed
 ```
+
+## Bài 11: Thiết kế giao diện form thêm sản phẩm
 
 ## Tài liệu tham khảo
 

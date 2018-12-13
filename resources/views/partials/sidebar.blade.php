@@ -8,7 +8,7 @@
             <a class="nav-link" href="/products">Product</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Category</a>
+            <a class="nav-link" href="{{ route('product.create') }}">Add new product</a>
         </li>
     </ul>
 </nav>

@@ -15,6 +15,11 @@ Route::get('/', 'HomeController@index');
 
 Route::get('/products', 'ProductsController@index');
 
+Route::get('/products/create', [
+    'as'    => 'product.create',
+    'uses'  => 'ProductsController@create'
+]);
+
 Route::get('/products/{id}', [
     'as'    => 'product.detail',
     'uses'  => 'ProductsController@detail'
