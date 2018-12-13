@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Carbon;
 use Faker\Factory as Faker;
 use App\Product;
+use App\Http\Requests\ProductFormRequest;
 
 class ProductsController extends Controller
 {
@@ -27,7 +28,7 @@ class ProductsController extends Controller
         return view('products.create');
     }
 
-    public function store() 
+    public function store(ProductFormRequest $request) 
     {
         // in kết quả ra kết hợp 2 hàm die() và dump() trong php
         // dd(Input::get('name'));

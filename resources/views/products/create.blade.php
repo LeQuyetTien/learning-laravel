@@ -15,11 +15,21 @@
         <div class="col-sm-6 offset-sm-3">
 
             <h3>Thêm sản phẩm mới</h3>
+
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             
             <form action="{{ route('product.store') }}" method="post">
 
                 @csrf
-                
+
                 <div class="form-group">
                   <label for="name">Tên sản phẩm</label>
                   <input type="text" class="form-control" name="name" id="name" aria-describedby="helpName" placeholder="Tên sản phẩm">
@@ -28,7 +38,7 @@
 
                 <div class="form-group">
                   <label for="description">Mô tả</label>
-                  <input type="text" class="form-control" name="description" id="description" aria-describedby="helpDescription" placeholder="Mô tả">
+                  <textarea class="form-control" name="description" id="description" aria-describedby="helpDescription" placeholder="Mô tả" rows="3"></textarea>
                   {{-- <small id="helpDescription" class="form-text text-muted">Help text description</small> --}}
                 </div>
 

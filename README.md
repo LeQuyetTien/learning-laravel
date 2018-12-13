@@ -42,7 +42,6 @@ Lưu ý: Nếu tạo database với collation khác `utf4mb4` thì cần vào `c
 
 > Ví dụ mình sử dụng **mysql** và tạo database với collation là `utf8_unicode_ci` thì mình tìm đến **connections -> mysql** rồi đổi lại như sau:
 >> 'charset' => 'utf8',                  //Mặc định là utf8mb4
->>
 >> 'collation' => 'utf8_unicode_ci',     //Mặc định là utf8mb4-unicode_ci
 
 ### Browsersync Reloading
@@ -66,20 +65,17 @@ Tìm hiểu thêm về Lavavel Mix trong link sau: [Compiling Assets (Mix)](http
 ### Import Boostrap
 
 1. Download Boostrap
-
-Link download từ trang chủ: <https://getbootstrap.com/docs/4.1/getting-started/download/>
-
-Link download từ github (có thư mục fonts): <https://github.com/twbs/bootstrap/tree/master>
+    - Link download từ trang chủ: <https://getbootstrap.com/docs/4.1/getting-started/download/>
+    - Link download từ github (có thư mục fonts): <https://github.com/twbs/bootstrap/tree/master>
 2. Giải nén
 3. Copy file `bootstrap.min.css` vào `thư mục public/css`
-3. Copy file `bootstrap.min.js` vào `thư mục public/js`
-4. Copy thư mục `font` vào trong thư mục `public`
+4. Copy file `bootstrap.min.js` vào `thư mục public/js`
+5. Copy thư mục `font` vào trong thư mục `public`
 
 ### Import jQuery
 
 1. Download jQuery
-
-Link download: <https://jquery.com/download/>
+    - Link download: <https://jquery.com/download/>
 2. Giải nén
 3. Copy file `jquery.min.js` vào `thư mục public/js`
 
@@ -113,7 +109,7 @@ Tài liệu về `Controllers`: <https://laravel.com/docs/5.7/controllers>
 php artisan make:migration create_products_table
 ```
 
-Sau khi chạy lệnh trên, 1 file tên là [TIMESTAMP]_create_products_table.php sẽ được tạo trong thư mục `database/migrations`
+Sau khi chạy lệnh trên, 1 file tên là `[TIMESTAMP]_create_products_table.php` sẽ được tạo trong thư mục `database/migrations`
 
 Chúng ta sẽ thêm các fields vào trong function `up`
 
@@ -150,7 +146,7 @@ Tài liệu về `Migration`: <https://viblo.asia/p/tim-hieu-ve-migration-trong-
 php artisan make:model Product
 ```
 
-Sau khi chạy lệnh trên, 1 file tên là Product.php sẽ được tạo trong thư mục `app`
+Sau khi chạy lệnh trên, 1 file tên là `Product.php` sẽ được tạo trong thư mục `app`
 
 Chúng ta sẽ liên kết *model **Product*** với *table **products*** bằng câu lệnh sau:
 
@@ -277,6 +273,57 @@ Trong form cần thêm câu lệnh `@csrf` để tạo token xác thực trướ
 ```php
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 ```
+
+## Bài 13: Kiểm tra dữ liệu từ form
+
+Để kiểm tra dữ liệu từ form ta tạo một product form request như sau:
+
+```bash
+php artisan make:request ProductFormRequest
+```
+
+Sau khi chạy lệnh trên, 1 file tên là `ProductFormRequest.php` sẽ được tạo trong thư mục `app/Http/Requests`
+
+Trong file này có 2 function là `authorize` và `rules`
+
+Để sử dụng ProductFormRequest ta sẽ đưa nó vào trong function cần xử lý như sau:
+
+```php
+public function store(ProductFormRequest $request)
+```
+
+Lúc này nếu chúng ta thử tạo một sản phẩm và submit thì sẽ xuất hiện lỗi *403:This action is unauthorized* bởi vì lúc này hàm `authorize` trong `ProductFormRequest` đang là `return false`. Ta cần sửa lại thành `return true`.
+
+Và để bắt lỗi nhập liệu trong form thì ta sẽ thêm vào hàm `ruler` như sau:
+
+```php
+public function rules()
+    {
+        return [
+            'name' => 'required|unique:products|max:255|alpha_num',
+            'description' => 'required|min:5|max:255',
+            'image' => 'required',
+            'price' => 'required|numeric',
+            'quantity' => 'required|numeric|integer'
+        ];
+    }
+```
+
+Để hiển thị lỗi trong form ta sử dụng câu lệnh sau:
+
+```php
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+```
+
+Tìm hiểu thêm về Validation: <https://laravel.com/docs/5.7/validation>
 
 ## Tài liệu tham khảo
 
