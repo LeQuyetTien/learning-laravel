@@ -22,4 +22,10 @@
             </div>
         @endforeach
     </div>
+
+    <div class="row text-center mt-3">
+        <div class="col-sm-4 offset-sm-4">
+            {!! $products->render() !!}
+        </div>
+    </div>
 @endsection

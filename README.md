@@ -333,6 +333,10 @@ Tìm hiểu thêm về Validation: <https://laravel.com/docs/5.7/validation>
 
 ## Bài 17: Xử lý xoá bài viết
 
+## Bài 18: Xử lý phân trang
+
+Paginate: <https://laravel.com/docs/5.7/pagination>
+
 ## Tài liệu tham khảo
 
 1. [laravel.com](https://laravel.com/docs/)
