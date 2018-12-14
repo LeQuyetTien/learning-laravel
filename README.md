@@ -329,6 +329,8 @@ Tìm hiểu thêm về Validation: <https://laravel.com/docs/5.7/validation>
 
 ## Bài 15: Tạo form chỉnh sửa bài viết
 
+## Bài 16: Tối ưu hoá việc sử dụng form trong blade
+
 ## Tài liệu tham khảo
 
 1. [laravel.com](https://laravel.com/docs/)

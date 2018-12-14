@@ -28,27 +28,7 @@
                 
             {!! Form::model($product, ['route' => ['product.update', $product->id], 'method' => 'put']) !!}
 
-                <div class="form-group">
-                    {!! Form::label('name', 'Tên sản phẩm') !!}
-                    {!! Form::text('name', null, ['id' => 'name', 'placeholder' => 'name', 'class' => 'form-control']) !!}
-                </div>  
-
-                <div class="form-group">
-                    {!! Form::label('description', 'Mô tả') !!}
-                    {!! Form::text('description', null, ['id' => 'description', 'placeholder' => 'description', 'class' => 'form-control']) !!}
-                </div>
-
-                <div class="form-group">
-                    {!! Form::label('price', 'Giá') !!}
-                    {!! Form::text('price', null, ['id' => 'price', 'placeholder' => 'price', 'class' => 'form-control']) !!}
-                </div>
-
-                <div class="form-group">
-                    {!! Form::label('quantity', 'Số lượng') !!}
-                    {!! Form::text('quantity', null, ['id' => 'quantity', 'placeholder' => 'quantity', 'class' => 'form-control']) !!}
-                </div>
-
-                {!! Form::submit('Cập nhật', ['class' => 'btn btn-primary']) !!}
+            @include('products._form', ['button_name' => 'Cập nhật'])
 
             {!! Form::close() !!}
 
