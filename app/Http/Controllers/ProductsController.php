@@ -62,4 +62,24 @@ class ProductsController extends Controller
 
         return redirect()->route('product.index');
     }
+
+    public function edit($id) 
+    {
+        $product = Product::find($id);
+        return view('products.edit', compact('product'));
+    }
+
+    public function update($id, ProductFormRequest $request) 
+    {
+        $product = Product::find($id);
+        $product->update([
+            'name' => $request->get('name'),
+            'description' => $request->get('description'),
+            'price' => $request->get('price'),
+            'quantity' => $request->get('quantity'),
+            'updated_at' => Carbon::now()
+        ]);
+
+        return redirect()->route('product.index');
+    }
 }

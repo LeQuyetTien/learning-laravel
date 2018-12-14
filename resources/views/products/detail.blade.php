@@ -20,4 +20,6 @@
             <p>Số lượng: {{ $product->quantity }}</p>
         </div>
     </div>
+    {{-- <a href="{{ url('/products/'.$product->id.'/edit') }}">Edit</a> --}}
+    <a href="{{ route('product.edit', $product->id) }}">Edit</a>
 @endsection

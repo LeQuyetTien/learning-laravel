@@ -28,6 +28,16 @@ Route::post('/products', [
     'uses'  => 'ProductsController@store'
 ]);
 
+Route::get('/products/{id}/edit', [
+    'as'    => 'product.edit',
+    'uses'  => 'ProductsController@edit'
+]);
+
+Route::put('/products/{id}', [
+    'as'    => 'product.update',
+    'uses'  => 'ProductsController@update'
+]);
+
 Route::get('/products/{id}', [
     'as'    => 'product.detail',
     'uses'  => 'ProductsController@detail'

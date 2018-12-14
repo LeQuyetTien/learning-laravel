@@ -325,6 +325,10 @@ public function rules()
 
 Tìm hiểu thêm về Validation: <https://laravel.com/docs/5.7/validation>
 
+## Bài 14: Đơn giản hoá cách sử dụng và thiết kế form gửi dữ liệu
+
+## Bài 15: Tạo form chỉnh sửa bài viết
+
 ## Tài liệu tham khảo
 
 1. [laravel.com](https://laravel.com/docs/)
