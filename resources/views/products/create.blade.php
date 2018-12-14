@@ -25,38 +25,32 @@
                     </ul>
                 </div>
             @endif
-            
-            <form action="{{ route('product.store') }}" method="post">
-
-                @csrf
+                
+            {!! Form::open(['route' => 'product.store', 'method' => 'post']) !!}
 
                 <div class="form-group">
-                  <label for="name">Tên sản phẩm</label>
-                  <input type="text" class="form-control" name="name" id="name" aria-describedby="helpName" placeholder="Tên sản phẩm">
-                  {{-- <small id="helpName" class="form-text text-muted">Help text name</small> --}}
+                    {!! Form::label('name', 'Tên sản phẩm') !!}
+                    {!! Form::text('name', '', ['id' => 'name', 'placeholder' => 'name', 'class' => 'form-control']) !!}
                 </div>  
 
                 <div class="form-group">
-                  <label for="description">Mô tả</label>
-                  <textarea class="form-control" name="description" id="description" aria-describedby="helpDescription" placeholder="Mô tả" rows="3"></textarea>
-                  {{-- <small id="helpDescription" class="form-text text-muted">Help text description</small> --}}
+                    {!! Form::label('description', 'Mô tả') !!}
+                    {!! Form::text('description', '', ['id' => 'description', 'placeholder' => 'description', 'class' => 'form-control']) !!}
                 </div>
 
                 <div class="form-group">
-                  <label for="price">Giá</label>
-                  <input type="text" class="form-control" name="price" id="price" aria-describedby="helpPrice" placeholder="Giá">
-                  {{-- <small id="helpPrice" class="form-text text-muted">Help text price</small> --}}
+                    {!! Form::label('price', 'Giá') !!}
+                    {!! Form::text('price', '', ['id' => 'price', 'placeholder' => 'price', 'class' => 'form-control']) !!}
                 </div>
 
                 <div class="form-group">
-                  <label for="quantity">Số lượng</label>
-                  <input type="text" class="form-control" name="quantity" id="quantity" aria-describedby="helpQuantity" placeholder="Số lượng">
-                  {{-- <small id="helpQuantity" class="form-text text-muted">Help text quantity</small> --}}
+                    {!! Form::label('quantity', 'Số lượng') !!}
+                    {!! Form::text('quantity', '', ['id' => 'quantity', 'placeholder' => 'quantity', 'class' => 'form-control']) !!}
                 </div>
 
-                <button type="submit" class="btn btn-primary">Thêm</button>
+                {!! Form::submit('Thêm', ['class' => 'btn btn-primary']) !!}
 
-            </form> <!-- form -->
+            {!! Form::close() !!}
 
         </div> <!-- .col-sm-6 -->
     </div> <!-- .row -->
