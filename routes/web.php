@@ -38,6 +38,11 @@ Route::put('/products/{id}', [
     'uses'  => 'ProductsController@update'
 ]);
 
+Route::delete('/products/{id}', [
+    'as'    => 'product.delete',
+    'uses'  => 'ProductsController@delete'
+]);
+
 Route::get('/products/{id}', [
     'as'    => 'product.detail',
     'uses'  => 'ProductsController@detail'

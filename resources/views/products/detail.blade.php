@@ -21,5 +21,13 @@
         </div>
     </div>
     {{-- <a href="{{ url('/products/'.$product->id.'/edit') }}">Edit</a> --}}
-    <a href="{{ route('product.edit', $product->id) }}">Edit</a>
+    <a href="{{ route('product.edit', $product->id) }}" class="btn btn-info">Edit</a>
+
+    {!! Form::open([ 
+        'route' => ['product.delete', $product->id],
+        'method' => 'delete',
+        'style' => 'display: inline'
+    ]) !!}
+        <button class="btn btn-danger">Delete</button>
+    {!! Form::close() !!}
 @endsection

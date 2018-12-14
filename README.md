@@ -331,6 +331,8 @@ Tìm hiểu thêm về Validation: <https://laravel.com/docs/5.7/validation>
 
 ## Bài 16: Tối ưu hoá việc sử dụng form trong blade
 
+## Bài 17: Xử lý xoá bài viết
+
 ## Tài liệu tham khảo
 
 1. [laravel.com](https://laravel.com/docs/)
