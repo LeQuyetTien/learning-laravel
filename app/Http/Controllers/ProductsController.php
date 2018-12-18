@@ -10,6 +10,8 @@ use App\Product;
 use App\Http\Requests\ProductFormRequest;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderShipped;
 
 class ProductsController extends Controller
 {
@@ -101,5 +103,30 @@ class ProductsController extends Controller
         $product->delete();
 
         return redirect()->route('product.index');
+    }
+
+    public function order($id)
+    {
+        $product = Product::find($id);
+
+        return view('products.order', compact('product'));
+    }
+
+    public function buy(Request $request, $id)
+    {
+        $product = Product::find($id);
+        
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'email',
+            'phone' => 'required',
+            'address' => 'required',
+        ]);
+
+        // dd($product->name);
+        $when = now()->addMinutes(2);
+        Mail::to($request->get('email'))->later($when, new OrderShipped($product, $request->get('name'), $request->get('email'), $request->get('phone'), $request->get('address'), $request->get('note')));
+   
+        return 'Email was sent later';
     }
 }

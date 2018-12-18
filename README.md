@@ -509,6 +509,27 @@ File::delete(public_path() . '/images/products/'.$product->image);
 
 [File Storage](http://laravel.com.vn/docs/5.7/filesystem)
 
+### Bài 4: Gửi email trong Laravel
+
+Để sử dụng chức năng này chúng ta cần phải cài đặt thư viện Guzzle HTTP:
+
+```bash
+composer require guzzlehttp/guzzle
+```
+
+Tiếp theo chúng ta cần cấu hình các biến môi trường sau trong file `.env` và trong `config/mail.php`:
+
+```php
+MAIL_DRIVER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=your_email@gmail.com
+MAIL_PASSWORD=your_password
+MAIL_ENCRYPTION=tls
+```
+
+Xêm thêm tại [Laravel Mail](http://laravel.com.vn/docs/5.7/mail)
+
 ## Tài liệu tham khảo
 
 1. [laravel.com](https://laravel.com/docs/)
