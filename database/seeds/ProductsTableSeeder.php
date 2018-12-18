@@ -16,7 +16,7 @@ class ProductsTableSeeder extends Seeder
         $faker = Faker\Factory::create();
 
         for ($i=0; $i < 10; $i++) { 
-            $url = $faker->image($dir='D:/dev/learning_laravel/public/images', $width='500', $height='500');
+            $url = $faker->image($dir=public_path().'/images/products', $width='500', $height='500');
             $image = substr($url, strpos($url, '\\')+1);
 
             Product::create([

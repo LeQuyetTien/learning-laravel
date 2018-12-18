@@ -26,9 +26,9 @@
                 </div>
             @endif
                 
-            {!! Form::model($product, ['route' => ['product.update', $product->id], 'method' => 'put']) !!}
+            {!! Form::model($product, ['route' => ['product.update', $product->id], 'method' => 'put', 'files' => true]) !!}
 
-            @include('products._form', ['button_name' => 'Cập nhật'])
+                @include('products._form', ['button_name' => 'Cập nhật'])
 
             {!! Form::close() !!}
 

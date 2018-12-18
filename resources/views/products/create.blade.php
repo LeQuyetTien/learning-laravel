@@ -26,7 +26,7 @@
                 </div>
             @endif
                 
-            {!! Form::open(['route' => 'product.store', 'method' => 'post']) !!}
+            {!! Form::open(['route' => 'product.store', 'method' => 'post', 'files' => true]) !!}
 
                 @include('products._form', ['button_name' => 'Thêm'])
 

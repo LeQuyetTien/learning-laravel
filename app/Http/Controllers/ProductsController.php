@@ -8,6 +8,7 @@ use Illuminate\Support\Carbon;
 use Faker\Factory as Faker;
 use App\Product;
 use App\Http\Requests\ProductFormRequest;
+use Illuminate\Support\Facades\File;
 
 class ProductsController extends Controller
 {
@@ -30,16 +31,14 @@ class ProductsController extends Controller
 
     public function store(ProductFormRequest $request) 
     {
-        // in kết quả ra kết hợp 2 hàm die() và dump() trong php
-        // dd(Input::get('name'));
-
-        // dùng faker để tạo image
-        // require_once 'D:/dev/learning_laravel/vendor/fzaninotto/faker/src/autoload.php';
-        $faker = Faker::create();
-        $url = $faker->image($dir='D:/dev/learning_laravel/public/images', $width='500', $height='500');
-        $image = substr($url, strpos($url, '\\')+1);
-
-        // dd($image);
+        if ($request->hasFile('image')) {
+            $image = $request->file('image')->getClientOriginalName();
+            $request->file('image')->move(
+                public_path() . '/images/products/', $image
+            );
+        } else {
+            $image = null;
+        }
 
         // get dữ liệu
         $name = Input::get('name');
@@ -72,7 +71,21 @@ class ProductsController extends Controller
     public function update($id, ProductFormRequest $request) 
     {
         $product = Product::find($id);
+
+        if ($request->hasFile('image')) {
+            // delete old image
+            $result = File::delete(public_path() . '/images/products/'.$product->image);
+            // add new image
+            $image = $request->file('image')->getClientOriginalName();
+            $request->file('image')->move(
+                public_path() . '/images/products/', $image
+            );
+        } else {
+            $image = $product->image;
+        }
+
         $product->update([
+            'image' => $image,
             'name' => $request->get('name'),
             'description' => $request->get('description'),
             'price' => $request->get('price'),
@@ -80,10 +93,11 @@ class ProductsController extends Controller
             'updated_at' => Carbon::now()
         ]);
 
-        return redirect()->route('product.index');
+        return redirect()->route('product.detail', compact('product'));
     }
 
-    public function delete($id) {
+    public function delete($id) 
+    {
         $product = Product::find($id);
         $product->delete();
 

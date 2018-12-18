@@ -1,4 +1,9 @@
 <div class="form-group">
+    {!! Form::label('image', 'Hình ảnh') !!}
+    {!! Form::file('image', null, ['id' => 'image', 'class' => 'form-control']) !!}
+</div>
+
+<div class="form-group">
     {!! Form::label('name', 'Tên sản phẩm') !!}
     {!! Form::text('name', null, ['id' => 'name', 'placeholder' => 'name', 'class' => 'form-control']) !!}
 </div>  
