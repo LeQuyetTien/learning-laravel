@@ -7,7 +7,7 @@
 @endsection
 
 @section('body.content')
-    <a href="{{ url('/products') }}">
+    <a href="{{ route('product.index') }}">
         <span class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
         Back
     </a>

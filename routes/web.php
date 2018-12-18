@@ -11,39 +11,18 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/products', [
-    'as'    => 'product.index',
-    'uses'  => 'ProductsController@index'
-]);
+Route::get('/products', 'ProductsController@index')->name('product.index');
 
-Route::get('/products/create', [
-    'as'    => 'product.create',
-    'uses'  => 'ProductsController@create'
-]);
+Route::get('/products/{id}', 'ProductsController@detail')->name('product.detail');
 
-Route::post('/products', [
-    'as'    => 'product.store',
-    'uses'  => 'ProductsController@store'
-]);
+Route::get('/products/create', 'ProductsController@create')->name('product.create');
 
-Route::get('/products/{id}/edit', [
-    'as'    => 'product.edit',
-    'uses'  => 'ProductsController@edit'
-]);
+Route::post('/products', 'ProductsController@store')->name('product.store');
 
-Route::put('/products/{id}', [
-    'as'    => 'product.update',
-    'uses'  => 'ProductsController@update'
-]);
+Route::get('/products/{id}/edit', 'ProductsController@edit')->name('product.edit');
 
-Route::delete('/products/{id}', [
-    'as'    => 'product.delete',
-    'uses'  => 'ProductsController@delete'
-]);
+Route::put('/products/{id}', 'ProductsController@update')->name('product.update');
 
-Route::get('/products/{id}', [
-    'as'    => 'product.detail',
-    'uses'  => 'ProductsController@detail'
-]);
+Route::delete('/products/{id}', 'ProductsController@delete')->name('product.delete');

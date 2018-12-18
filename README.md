@@ -1,4 +1,4 @@
-# laravel
+# learning_laravel
 
 Tìm hiểu Laravel
 
@@ -386,6 +386,79 @@ use Illuminate\Support\Facades\File;
 ...
     File::delete(public_path().'/images/products/'.$product->image);
 ...
+```
+
+### Bài 2: Cập nhật và tối ưu hóa hệ thống
+
+#### Cập nhật Route
+
+Thay thế:
+
+```php
+Route::get('/products/{id}', [
+    'as'    => 'product.detail',
+    'uses'  => 'ProductsController@detail'
+]);
+```
+
+bằng:
+
+```php
+Route::get('/products/{id}', 'ProductsController@detail')->name('product.detail');
+```
+
+Các bạn có thể thấy là code mới gọn gàng hơn nhiều!
+
+#### Sửa lỗi conflic Route
+
+Trong series (Bài 11 và Bài 15) chúng ta thấy khi sử dụng `Route::get('/products/create'` và `Route::get('/products/edit'` sau `Route::get('/products/{id}'` sẽ gây ra lỗi. Vì lúc này Laravel hiều nhầm rằng `create` và `edit` là biến `id` chúng ta cần truyền vào, trong khi biến `id` của chúng ta là kiểu `interger`.
+
+Để sửa lỗi này chúng ta có thể thêm ràng buộc cho biến `id` như sau:
+
+```php
+Route::get('/products/{id}', 'ProductsController@detail')->name('product.detail')
+    ->where('id', '[0-9]+');
+```
+
+Nếu muốn sử dụng điều kiện này cho bất kỳ Route nào sử dụng biến `id` thì chúng ta chỉ cần thêm vào file `RouteServiceProvider.php` như sau:
+
+```php
+public function boot()
+{
+    Route::pattern('id', '[0-9]+');
+
+    parent::boot();
+}
+```
+
+#### Cập nhật đường đẫn file `.css`, `.js` và `href`
+
+Thay thế:
+
+```php
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<script src="/js/jquery.min.js"></script>
+```
+
+bằng:
+
+```php
+<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+```
+
+Nếu sử dụng code cũ, nó sẽ chạy đúng với `php artisan serve` nhưng khi truy `http://localhost/[PROJECT_NAME]/public/` trong Apache sẽ bị lỗi đường dẫn
+
+Tương tự, ta sử dụng:
+
+```php
+<a class="nav-link" href="{{ route('product.index') }}">Product</a>
+```
+
+thay vì:
+
+```php
+<a class="nav-link" href="/products">Product</a>
 ```
 
 ## Tài liệu tham khảo
