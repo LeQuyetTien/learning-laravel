@@ -13,7 +13,7 @@
     </a>
     <div class="row">
         <div class="col-sm-12 text-center">
-            <img class="card-img-top product-image" src="{{ asset('images/products/'.$product->image) }}" alt="Card image">
+            <img class="card-img-top product-image" src="{{ asset('storage/'.$product->image) }}" alt="Card image">
             <h2>{{ $product->name }}</h2>
             <p>{{ $product->description }}</p>
             <p>Giá: {{ $product->price }}</p>

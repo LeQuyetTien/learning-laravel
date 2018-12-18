@@ -461,6 +461,54 @@ thay vì:
 <a class="nav-link" href="/products">Product</a>
 ```
 
+### Bài 3: Sử dụng File Storage
+
+Tạo symbolic link
+
+```bash
+php artisan storage:link
+```
+
+Sau khi chạy lệnh trên, thư mục `public/storage` được tạo và nó sẽ link đến thư mục `storage/app/public`. Bây giờ bất kỳ tệp nào trong `storage/app/public` đều có thể được truy cập thông qua một liên kết như:
+
+```php
+http://somedomain.com/storage/image.jpg
+```
+
+Để lưu file uploaded vào thư mục `storage/app/public/products` ta sử dụng câu lệnh sau:
+
+```php
+Storage::putFile('public/products', $request->file('image'));
+```
+
+thay cho
+
+```php
+$image = $request->file('image')->getClientOriginalName();
+$request->file('image')->move(
+    public_path() . '/images/products/', $image
+);
+```
+
+> Lưu ý: Mặc định Laravel sẽ sử dụng hashKey của file uploaded để đặt tên cho file và chúng ta có thể get nó với câu lệnh sau:
+> ```php
+> $request->file('image')->hashName()
+> ```
+
+Để xóa file trong thư mục `storage/app/public` ta sử dụng câu lệnh sau:
+
+```php
+Storage::delete('public/'.$product->image);
+```
+
+thay cho
+
+```php
+File::delete(public_path() . '/images/products/'.$product->image);
+```
+
+[File Storage](http://laravel.com.vn/docs/5.7/filesystem)
+
 ## Tài liệu tham khảo
 
 1. [laravel.com](https://laravel.com/docs/)

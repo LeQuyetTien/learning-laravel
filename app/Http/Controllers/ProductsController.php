@@ -9,6 +9,7 @@ use Faker\Factory as Faker;
 use App\Product;
 use App\Http\Requests\ProductFormRequest;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class ProductsController extends Controller
 {
@@ -32,10 +33,8 @@ class ProductsController extends Controller
     public function store(ProductFormRequest $request) 
     {
         if ($request->hasFile('image')) {
-            $image = $request->file('image')->getClientOriginalName();
-            $request->file('image')->move(
-                public_path() . '/images/products/', $image
-            );
+            $path = Storage::putFile('public/products', $request->file('image'));
+            $image = $request->file('image')->hashName();
         } else {
             $image = null;
         }
@@ -52,7 +51,7 @@ class ProductsController extends Controller
         Product::create([
             'name' => $name,
             'description' => $description,
-            'image' => $image,
+            'image' => 'products/'.$image,
             'price' => $price,
             'quantity' => $quantity,
             'created_at' => Carbon::now(),
@@ -74,18 +73,16 @@ class ProductsController extends Controller
 
         if ($request->hasFile('image')) {
             // delete old image
-            $result = File::delete(public_path() . '/images/products/'.$product->image);
+            Storage::delete('public/'.$product->image);
             // add new image
-            $image = $request->file('image')->getClientOriginalName();
-            $request->file('image')->move(
-                public_path() . '/images/products/', $image
-            );
+            Storage::putFile('public/products', $request->file('image'));
+            $image = $request->file('image')->hashName();
         } else {
             $image = $product->image;
         }
 
         $product->update([
-            'image' => $image,
+            'image' => 'products/'.$image,
             'name' => $request->get('name'),
             'description' => $request->get('description'),
             'price' => $request->get('price'),
@@ -99,6 +96,8 @@ class ProductsController extends Controller
     public function delete($id) 
     {
         $product = Product::find($id);
+        // delete image
+        Storage::delete('public/'.$product->image);
         $product->delete();
 
         return redirect()->route('product.index');

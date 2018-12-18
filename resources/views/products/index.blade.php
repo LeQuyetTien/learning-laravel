@@ -11,13 +11,13 @@
     <div class="row">
         @foreach ($products as $p)
             <div class="card col-sm-3">
-                <img class="card-img-top" src="{{ asset('images/products/'.$p->image) }}" alt="Card image">
+                <img class="card-img-top" src="{{ asset('storage/'.$p->image) }}" alt="Card image">
                 <div class="card-body">
                     <a href="{{ route('product.detail', $p->id) }}">
                         <h4 class="card-title">{{ $p->name }}</h4>
                     </a>
                     <p class="card-text">{{ $p->description }}</p>
-                    <a href="#" class="btn btn-primary">Buy now</a>
+                    <a href="{{ route('product.order', $p->id) }}" class="btn btn-primary">Buy now</a>
                 </div>
             </div>
         @endforeach
